@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { createContext, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Gallery from './Components/Gallery';
+import SubGallery from './Components/SubGallery';
+import Navigation from './Components/Navigation';
+import Context from "./Context";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// export const CookieContext = createContext(null);
 
-export default App;
+const App = () => {
+    const [images, setImages] = useState(null);
+    return (
+      <div className='container mb-5'> 
+          <Navigation />
+
+          {/* <CookieContext.Provider value={[cookie, setCookie]}> */}
+          <Context value={[images, setImages]}>
+              <Routes>
+                <Route path='/' element={<Gallery />} />
+                <Route path='/gallery/:id' element={<SubGallery />} />
+              </Routes>
+          </Context>
+        
+      </div>
+    ); 
+ };
+  
+   export default App;
